@@ -12,10 +12,16 @@ import liquibase.database.DatabaseFactory;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.exception.DatabaseException;
 import liquibase.exception.LiquibaseException;
-import liquibase.resource.FileSystemResourceAccessor;
+import liquibase.resource.ClassLoaderResourceAccessor;
 
 public class LiquibaseStartup {
 	
+	private ClassLoader classLoader;
+
+	public LiquibaseStartup(ClassLoader classLoader) {
+		this.classLoader = classLoader;
+	}
+
 	public void run() throws DatabaseException {
 		new Driver();
 		
@@ -26,13 +32,15 @@ public class LiquibaseStartup {
 	        
 	    	Database database = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(c));
 	        
-	        liquibase = new Liquibase("db/v1.xml", new FileSystemResourceAccessor(), database);
+	    	ClassLoaderResourceAccessor resourceAcessor = new ClassLoaderResourceAccessor(classLoader);
+	    	
+	        liquibase = new Liquibase("db/v1.xml", resourceAcessor, database);
 	        
 	        liquibase.update((String)null);
 	        
 //	        liquibase.rollback(1, (String)null);
 	        
-	        liquibase = new Liquibase("db/v2.xml", new FileSystemResourceAccessor(), database);
+	        liquibase = new Liquibase("db/v2.xml", resourceAcessor, database);
 	        
 	        liquibase.update((String)null);
 	        

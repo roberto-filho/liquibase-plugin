@@ -19,7 +19,7 @@ public class Activator implements BundleActivator {
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
 		
-		LiquibaseStartup liqui = new LiquibaseStartup();
+		LiquibaseStartup liqui = new LiquibaseStartup(getClass().getClassLoader());
 		
 		liqui.run();
 		
