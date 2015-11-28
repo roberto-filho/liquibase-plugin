@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Liquibase test
+Bundle-SymbolicName: org.filho.liquibase.test
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.filho.liquibase.test.Activator
+Bundle-Vendor: Filho.org
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
+Import-Package: liquibase;version="3.1.1",
+ liquibase.database;version="3.1.1",
+ liquibase.database.jvm;version="3.1.1",
+ liquibase.exception;version="3.1.1",
+ liquibase.resource;version="3.1.1",
+ org.osgi.framework;version="1.8.0",
+ org.postgresql;version="9.4.0"
